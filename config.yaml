@@ -10,3 +10,45 @@ parsers:
   - page_type: books
     file: ./parsers/books.rb
     disabled: true
+
+exporters:
+  - exporter_name: books_json # Must be unique
+    exporter_type: json
+    collection: books
+    write_mode: pretty_array # can be `line`,`pretty`, `pretty_array`, or `array`
+    offset: 0 # offset to where the exported record will start from
+    order: desc # can be ascending `asc` or descending `desc`
+    start_on_job_done: true 
+
+  - exporter_name: books_csv
+    exporter_type: csv
+    collection: books
+    start_on_job_done: true
+    fields:
+      - header: "gid"
+        path: "_gid"
+      - header: "created_at"
+        path: "_created_at"
+      - header: "Title"
+        path: "Title"
+      - header: "Series"
+        path: "Series"
+      - header: "Author"
+        path: "Author"
+      - header: "Rating"
+        path: "Rating"
+      - header: "Rating Count"
+        path: "Rating Count"
+      - header: "Review Count"
+        path: "Review Count"
+      - header: "Description"
+        path: "Description"
+      - header: "Similar Books"
+        path: "Similar Books"
+      - header: "List"
+        path: "List"
+      - header: "url"
+        path: "url"
+      - header: "img_url"
+        path: "img_url"
+    

@@ -7,38 +7,48 @@ book = {}
 book['url'] = page['vars']['url']
 
 # image url
-book['img_url'] = nokogiri.at_css('span.cover a img')["src"]
+book['img_url'] = "!no_image"
+book['img_url'] = nokogiri.at_css('img#coverImage')["src"] unless nokogiri.at_css('img#coverImage').nil?
+
+#save the url
+book['List'] = page['vars']['list_name']
 
 # title
-book['Title'] = nokogiri.at_css('a.winningTitle').text.strip unless nokogiri.at_css('a.winningTitle').nil?
+book['Title'] = "!title_not_found"
+book['Title'] = nokogiri.at_css('h1#bookTitle').text.strip unless nokogiri.at_css('h1#bookTitle').nil?
+
+# book series
+book['Series'] = "!series_not_found"
+book['Series'] = nokogiri.at_css('h2#bookSeries').text.strip unless nokogiri.at_css('h2#bookSeries').nil?
 
 # author
-book['Author'] = nokogiri.at_css('span[itemprop="name"]').text.strip unless nokogiri.at_css('span[itemprop="name"]').nil?
+book['Author'] = "!author_not_found"
+book['Author'] = nokogiri.at_css('span[itemprop="author"] a.authorName span').text.strip unless nokogiri.at_css('span[itemprop="author"] a.authorName span').nil?
 
-# award year
-book['Award Year'] = book['url'][/\d+/,0] unless book['url'].nil?
-
-# award category
-book['Award Category'] = nokogiri.at_css('div.gcaMastheader').text.strip unless nokogiri.at_css('div.gcaMastheader').nil?
+# book rating
+book["Rating"] = 0.0
+book["Rating"] = nokogiri.at_css('span[itemprop="ratingValue"]').text.to_f unless nokogiri.at_css('span[itemprop="ratingValue"]').nil?
 
 # number of votes
-book["Number of Votes"] = nokogiri.at_css('span.gcaNumVotes').text.strip.gsub("\n"," ") + " out of " + nokogiri.at_css('div.gcaNumVotes').text.strip.gsub("\n"," ")
+book["Rating Count"] = 0
+book["Rating Count"] = nokogiri.at_css('meta[itemprop="ratingCount"]')["content"].to_i unless nokogiri.at_css('meta[itemprop="ratingCount"]').nil?
 
-# All nominees
-book['Nominees'] = []
-
-nominee_node = nokogiri.css("div.inlineblock.pollAnswer.resultShown")
-
-nominee_node.each do |nom|
-    book['Nominees'] << nom.at_css("img")['alt']
-end
+# number of review
+book["Review Count"] = 0
+book["Review Count"] = nokogiri.at_css('meta[itemprop="reviewCount"]')["content"].to_i unless nokogiri.at_css('meta[itemprop="reviewCount"]').nil?
 
 # description
-book['Description'] = nokogiri.at_css('div#description').text.strip unless nokogiri.at_css('div#description').nil?
-book['Description'] = nokogiri.at_css('div#descrption').text.strip unless nokogiri.at_css('div#descrption').nil?
-book['Description'] = nokogiri.at_css('div#descrption span[style="display:none"]').text.strip unless nokogiri.at_css('div#descrption span[style="display:none"]').nil?
-book['Description'] = nokogiri.at_css('div#description span[style="display:none"]').text.strip unless nokogiri.at_css('div#description span[style="display:none"]').nil?
+book['Description'] = "!no_description_found"
+book['Description'] = nokogiri.css('div#description span').last.text.strip unless nokogiri.at_css('div#description span').nil?
 
+# Similar Books
+book['Similar Books'] = []
+
+similar_book_node = nokogiri.css("div.clearFloats div.bookCarousel li a img")
+
+similar_book_node.each do |sim|
+    book['Similar Books'] << sim['alt']
+end
 
 # specify the collection where this record will be stored
 book['_collection'] = 'books'
