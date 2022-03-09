@@ -16,6 +16,7 @@ book['List'] = page['vars']['list_name']
 # title
 book['Title'] = "!title_not_found"
 book['Title'] = nokogiri.at_css('h1#bookTitle').text.strip unless nokogiri.at_css('h1#bookTitle').nil?
+raise "Title not found" if book['Title'] == "!title_not_found" #penjaga aja, kali aja pagenya belum keload dengan baik
 
 # book series
 book['Series'] = "!series_not_found"
