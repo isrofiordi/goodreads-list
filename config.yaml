@@ -9,7 +9,7 @@ parsers:
 
   - page_type: books
     file: ./parsers/books.rb
-    disabled: true
+    disabled: false
 
 exporters:
   - exporter_name: books_json # Must be unique
