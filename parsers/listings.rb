@@ -18,12 +18,12 @@ books_container.each do |book|
               "rank" => rank,
               "page_num" => page['vars']['page_num']
             },
-          fetch_type: "browser",
-          driver: { 
-              code: "
-              await page.waitForNavigation({waitUntil: 'domcontentloaded'}); 
-              "
-          } # nunggu sampai ga ada koneksi lagi setidaknya dalam rentang 500 ms.
+          fetch_type: "browser"
+        #   driver: { 
+        #       code: "
+        #       await page.waitForNavigation({waitUntil: 'domcontentloaded'}); 
+        #       "
+        #   } # nunggu sampai ga ada koneksi lagi setidaknya dalam rentang 500 ms.
     }
 rank += 1
 end
@@ -42,11 +42,11 @@ if next_page_node
             "list_name" => "Books That Everyone Should Read At Least Once",
             "page_num" => "page_num" => page['vars']['page_num']+1
         },
-        fetch_type: "browser",
-        driver: { 
-              code: "
-              await page.waitForNavigation({waitUntil: 'domcontentloaded'}); 
-              "
-        } # nunggu sampai ga ada koneksi lagi setidaknya dalam rentang 500 ms.
+        fetch_type: "browser"
+        # driver: { 
+        #       code: "
+        #       await page.waitForNavigation({waitUntil: 'domcontentloaded'}); 
+        #       "
+        # } # nunggu sampai ga ada koneksi lagi setidaknya dalam rentang 500 ms.
     }
 end

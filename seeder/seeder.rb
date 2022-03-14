@@ -7,10 +7,10 @@ pages << {
     "list_name" => "Books That Everyone Should Read At Least Once",
     "page_num" => 1 # start halaman
   },
-  fetch_type: "browser",
-  driver: { 
-              code: "
-              await page.waitForNavigation({waitUntil: 'domcontentloaded'}); 
-              "
-  } # nunggu sampai ga ada koneksi lagi setidaknya dalam rentang 500 ms.
+  fetch_type: "browser"
+  # driver: { 
+  #             code: "
+  #             await page.waitForNavigation({waitUntil: 'domcontentloaded'}); 
+  #             "
+  # } # nunggu sampai ga ada koneksi lagi setidaknya dalam rentang 500 ms.
 }
