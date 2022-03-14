@@ -21,7 +21,7 @@ books_container.each do |book|
           fetch_type: "browser",
           driver: { 
               code: "
-              await page.waitForNavigation({waitUntil: 'networkidle0'}); 
+              await page.waitForNavigation({waitUntil: 'domcontentloaded'}); 
               "
           } # nunggu sampai ga ada koneksi lagi setidaknya dalam rentang 500 ms.
     }
@@ -45,7 +45,7 @@ if next_page_node
         fetch_type: "browser",
         driver: { 
               code: "
-              await page.waitForNavigation({waitUntil: 'networkidle0'}); 
+              await page.waitForNavigation({waitUntil: 'domcontentloaded'}); 
               "
         } # nunggu sampai ga ada koneksi lagi setidaknya dalam rentang 500 ms.
     }

@@ -10,7 +10,7 @@ pages << {
   fetch_type: "browser",
   driver: { 
               code: "
-              await page.waitForNavigation({waitUntil: 'networkidle0'}); 
+              await page.waitForNavigation({waitUntil: 'domcontentloaded'}); 
               "
   } # nunggu sampai ga ada koneksi lagi setidaknya dalam rentang 500 ms.
 }
