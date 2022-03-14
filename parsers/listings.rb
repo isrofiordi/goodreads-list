@@ -40,7 +40,7 @@ if next_page_node
         url: next_page_link,
         vars: {
             "list_name" => "Books That Everyone Should Read At Least Once",
-            "page_num" => "page_num" => page['vars']['page_num']+1
+            "page_num" => page['vars']['page_num'] + 1
         },
         fetch_type: "browser"
         # driver: { 
