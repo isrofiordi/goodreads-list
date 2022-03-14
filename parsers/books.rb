@@ -51,6 +51,10 @@ similar_book_node.each do |sim|
     book['Similar Books'] << sim['alt']
 end
 
+# page number and book rank in that page
+book['Page Number'] = page['vars']['page_num']
+book['Page Rank'] = page['vars']['rank']
+
 # specify the collection where this record will be stored
 book['_collection'] = 'books'
 
